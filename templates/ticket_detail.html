@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<br />
+<div align="right">
+  <a href="/" class="btn btn-primary">Home</a>&nbsp;<a
+    href="/login/"
+    class="btn btn-primary"
+    >Login</a
+  >&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>
+</div>
+{% if not ticket %}
+<h1>The ticket you are looking for does not exist.</h1>
+{% else %}
+<h2>{{ ticket.title }}</h2>
+<h4>Description: {{ ticket.description }}</h4>
+{% endif %} {% endblock %}

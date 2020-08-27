@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<br />
+<div align="right">
+  <a href="/login/" class="btn btn-primary">Login</a>&nbsp;<a
+    href="/logout/"
+    class="btn btn-primary"
+    >Logout</a
+  >
+</div>
+{% if request.user.is_authenticated %}
+<h2>Welcome, you are logged in as {{ request.user.username }}.</h2>
+{% else %}
+<h2>Welcome, please <a href="/login/">login</a>.</h2>
+{% endif %} {% endblock %}
