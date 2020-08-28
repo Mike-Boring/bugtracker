@@ -57,8 +57,9 @@ def add_ticket_view(request):
             new_ticket = Ticket.objects.create(
                 title=data.get('title'),
                 description=data.get('description'),
-                user_filed=request.user.username
+                user_filed=request.user
             )
+            # breakpoint()
             return HttpResponseRedirect(reverse("ticketview", args=[new_ticket.id]))
 
     form = AddTicketForm()
