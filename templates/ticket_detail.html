@@ -13,7 +13,11 @@
 <h2>{{ ticket.title }}</h2>
 <h4>Description: {{ ticket.description }}</h4>
 <h4>Created on: {{ ticket.post_date }}</h4>
-<h4>Created by: {{ ticket.user_filed }}</h4>
+<h4>
+  Created by:
+  <a href="/user/{{ ticket.user_filed.id }}/">{{ ticket.user_filed }}</a> anchor
+  not going to user for
+</h4>
 <h4>Assigned to: {{ ticket.user_assigned }}</h4>
 <h4>Completed by: {{ ticket.user_completed }}</h4>
 {% endif %} {% endblock %}

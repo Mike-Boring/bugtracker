@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from homepage.forms import LoginForm, AddTicketForm
-from django.contrib.auth.models import User
+from myuser.models import MyUser
 from homepage.models import Ticket
 
 # Create your views here.

@@ -8,11 +8,21 @@
   >&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>
 </div>
 <h1>{{ selected_user }}</h1>
-<h2>Filed Tickets</h2>
-<h3>{{ filed_tickets }}</h3>
-<h2>Assigned Tickets</h2>
-<h3>{{ assigned_tickets }}</h3>
-<h2>Completed Tickets</h2>
-<h3>{{ completed_tickets }}</h3>
-
-{% endblock %}
+<h3>Filed Tickets</h3>
+{% if filed_tickets %} {% for post in filed_tickets %}
+<p>{{ post }}</p>
+{% endfor %} {% else %}
+<p>There are no filed tickets to display.</p>
+{% endif %}
+<h3>Assigned Tickets</h3>
+{% if assigned_tickets %} {% for post in assigned_tickets %}
+<p>{{ post }}</p>
+{% endfor %} {% else %}
+<p>There are no assigned tickets to display.</p>
+{% endif %}
+<h3>Completed Tickets</h3>
+{% if completed_tickets %} {% for post in completed_tickets %}
+<p>{{ post }}</p>
+{% endfor %} {% else %}
+<p>There are no completed tickets to display.</p>
+{% endif %} {% endblock %}
