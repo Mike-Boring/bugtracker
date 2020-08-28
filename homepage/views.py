@@ -10,7 +10,8 @@ from homepage.models import Ticket
 
 
 def index(request):
-    new_tickets = Ticket.objects.filter(status='New')
+    new_tickets = Ticket.objects.filter(
+        status='New').order_by('post_date').reverse()
     progress_tickets = Ticket.objects.filter(status='InProgress')
     completed_tickets = Ticket.objects.filter(status='Done')
     invalid_tickets = Ticket.objects.filter(status='Invalid')

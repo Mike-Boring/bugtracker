@@ -5,12 +5,16 @@
     href="/login/"
     class="btn btn-primary"
     >Login</a
-  >&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>
+  >&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>&nbsp;<a
+    href="/addticket/"
+    class="btn btn-primary"
+    >Create Ticket</a
+  >
 </div>
 <h1>{{ selected_user }}</h1>
 <h3>Filed Tickets</h3>
 {% if filed_tickets %} {% for post in filed_tickets %}
-<p>{{ post }}</p>
+<p><a href="/ticket/{{ post.id }}/">{{ post }}</a></p>
 {% endfor %} {% else %}
 <p>There are no filed tickets to display.</p>
 {% endif %}

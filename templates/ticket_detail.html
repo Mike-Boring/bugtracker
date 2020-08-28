@@ -5,7 +5,11 @@
     href="/login/"
     class="btn btn-primary"
     >Login</a
-  >&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>
+  >&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>&nbsp;<a
+    href="/addticket/"
+    class="btn btn-primary"
+    >Create Ticket</a
+  >
 </div>
 {% if not ticket %}
 <h1>The ticket you are looking for does not exist.</h1>
@@ -15,8 +19,7 @@
 <h4>Created on: {{ ticket.post_date }}</h4>
 <h4>
   Created by:
-  <a href="/user/{{ ticket.id }}/">{{ ticket.user_filed }}</a> anchor not going
-  to user for
+  <a href="/user/{{ ticket.user_filed.id }}/">{{ ticket.user_filed }}</a>
 </h4>
 <h4>Assigned to: {{ ticket.user_assigned }}</h4>
 <h4>Completed by: {{ ticket.user_completed }}</h4>
