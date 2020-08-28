@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+<br />
+<div align="right">
+  <a href="/" class="btn btn-primary">Home</a>&nbsp;<a
+    href="/login/"
+    class="btn btn-primary"
+    >Login</a
+  >&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>
+</div>
+<h1>{{ selected_user }}</h1>
+<h2>Filed Tickets</h2>
+<h3>{{ filed_tickets }}</h3>
+<h2>Assigned Tickets</h2>
+<h3>{{ assigned_tickets }}</h3>
+<h2>Completed Tickets</h2>
+<h3>{{ completed_tickets }}</h3>
+
+{% endblock %}

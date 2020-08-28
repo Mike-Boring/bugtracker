@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'myuser',
     'homepage',
 ]
 
@@ -121,3 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = "/login/"
+
+AUTH_USER_MODEL = "myuser.MyUser"
