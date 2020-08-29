@@ -37,8 +37,9 @@ def user_detail_view(request, user_id):
         user_assigned=selected_user).order_by('post_date').reverse()
     user_completed_tickets = Ticket.objects.filter(
         user_completed=selected_user).order_by('post_date').reverse()
+    current_time = timezone.now()
 
-    return render(request, "user_detail.html", {"selected_user": selected_user, "filed_tickets": user_filed_tickets, "assigned_tickets": user_assigned_tickets, "completed_tickets": user_completed_tickets})
+    return render(request, "user_detail.html", {"selected_user": selected_user, "filed_tickets": user_filed_tickets, "assigned_tickets": user_assigned_tickets, "completed_tickets": user_completed_tickets, "current_time": current_time})
 
 
 def login_view(request):

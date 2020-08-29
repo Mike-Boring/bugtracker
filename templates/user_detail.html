@@ -37,7 +37,10 @@
           <td>
             <a href="/user/{{ post.user_filed.id }}/">{{ post.user_filed }}</a>
           </td>
-          <td>day(s)</td>
+          <td>{{ current_time|timeuntil:post.post_date }}</td>
+          {% comment %} for reference :
+          https://stackoverflow.com/questions/7887897/calculate-number-of-days-between-two-dates-inside-django-templates
+          {% endcomment %}
         </tr>
         {% endfor %} {% else %}
         <tr>
@@ -76,7 +79,7 @@
           <td>
             <a href="/user/{{ post.user_filed.id }}/">{{ post.user_filed }}</a>
           </td>
-          <td>day(s)</td>
+          <td>{{ current_time|timeuntil:post.post_date }}</td>
         </tr>
         {% endfor %} {% else %}
         <tr>
@@ -115,7 +118,7 @@
           <td>
             <a href="/user/{{ post.user_filed.id }}/">{{ post.user_filed }}</a>
           </td>
-          <td>day(s)</td>
+          <td>{{ current_time|timeuntil:post.post_date }}</td>
         </tr>
         {% endfor %} {% else %}
         <tr>
