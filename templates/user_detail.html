@@ -12,21 +12,122 @@
   >
 </div>
 <h1>{{ selected_user }}</h1>
-<h3>Filed Tickets</h3>
-{% if filed_tickets %} {% for post in filed_tickets %}
-<p><a href="/ticket/{{ post.id }}/">{{ post }}</a></p>
-{% endfor %} {% else %}
-<p>There are no filed tickets to display.</p>
-{% endif %}
-<h3>Assigned Tickets</h3>
-{% if assigned_tickets %} {% for post in assigned_tickets %}
-<p>{{ post }}</p>
-{% endfor %} {% else %}
-<p>There are no assigned tickets to display.</p>
-{% endif %}
-<h3>Completed Tickets</h3>
-{% if completed_tickets %} {% for post in completed_tickets %}
-<p>{{ post }}</p>
-{% endfor %} {% else %}
-<p>There are no completed tickets to display.</p>
-{% endif %} {% endblock %}
+
+<div class="card" style="padding: 2px">
+  <h2 class="card-header" style="background-color: #bbb; padding: 10px">
+    Filed Tickets
+  </h2>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" style="width: 55%">Title</th>
+          <th scope="col">Assigned To</th>
+          <th scope="col">Reported By</th>
+          <th scope="col">Ticket Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if filed_tickets %} {% for post in filed_tickets %}
+        <tr>
+          <th scope="row">{{ post.id }}</th>
+          <td><a href="/ticket/{{ post.id }}/">{{ post.title }}</a></td>
+          <td>{{ post.user_assigned }}</td>
+          <td>
+            <a href="/user/{{ post.user_filed.id }}/">{{ post.user_filed }}</a>
+          </td>
+          <td>day(s)</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <th scope="row"></th>
+          <td><p>There are no Filed Tickets to display.</p></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card" style="padding: 2px">
+  <h2 class="card-header" style="background-color: #bbb; padding: 10px">
+    Assigned Tickets
+  </h2>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" style="width: 55%">Title</th>
+          <th scope="col">Assigned To</th>
+          <th scope="col">Reported By</th>
+          <th scope="col">Ticket Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if assigned_tickets %} {% for post in assigned_tickets %}
+        <tr>
+          <th scope="row">{{ post.id }}</th>
+          <td><a href="/ticket/{{ post.id }}/">{{ post.title }}</a></td>
+          <td>{{ post.user_assigned }}</td>
+          <td>
+            <a href="/user/{{ post.user_filed.id }}/">{{ post.user_filed }}</a>
+          </td>
+          <td>day(s)</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <th scope="row"></th>
+          <td><p>There are no Assigned Tickets to display.</p></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card" style="padding: 2px">
+  <h2 class="card-header" style="background-color: #bbb; padding: 10px">
+    Completed Tickets
+  </h2>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" style="width: 55%">Title</th>
+          <th scope="col">Assigned To</th>
+          <th scope="col">Reported By</th>
+          <th scope="col">Ticket Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if completed_tickets %} {% for post in completed_tickets %}
+        <tr>
+          <th scope="row">{{ post.id }}</th>
+          <td><a href="/ticket/{{ post.id }}/">{{ post.title }}</a></td>
+          <td>{{ post.user_assigned }}</td>
+          <td>
+            <a href="/user/{{ post.user_filed.id }}/">{{ post.user_filed }}</a>
+          </td>
+          <td>day(s)</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <th scope="row"></th>
+          <td><p>There are no Completed Tickets to display.</p></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

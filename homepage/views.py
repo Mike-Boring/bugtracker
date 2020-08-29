@@ -13,7 +13,7 @@ def index(request):
     new_tickets = Ticket.objects.filter(
         status='New').order_by('post_date').reverse()
     progress_tickets = Ticket.objects.filter(
-        status='InProgress').order_by('post_date').reverse()
+        status='In Progress').order_by('post_date').reverse()
     completed_tickets = Ticket.objects.filter(
         status='Done').order_by('post_date').reverse()
     invalid_tickets = Ticket.objects.filter(
@@ -82,6 +82,50 @@ def ticket_edit_view(request, ticket_id):
 
     form = AddTicketForm(instance=edit_ticket)
     return render(request, "generic_form.html", {"form": form})
+
+
+@login_required
+def ticket_action_view(request, ticket_id, action_id):
+    edit_ticket = Ticket.objects.filter(id=ticket_id).first()
+    if action_id == 'assign':
+        edit_ticket.user_assigned = request.user.username
+        edit_ticket.status = 'In Progress'
+        edit_ticket.save()
+
+        return HttpResponseRedirect(reverse("ticketview", args=[edit_ticket.id]))
+
+    if action_id == 'done':
+        edit_ticket.user_assigned = 'None'
+        edit_ticket.status = 'Done'
+        edit_ticket.user_completed = request.user.username
+        edit_ticket.save()
+
+        return HttpResponseRedirect(reverse("ticketview", args=[edit_ticket.id]))
+
+    if action_id == 'invalid':
+        edit_ticket.user_assigned = 'None'
+        edit_ticket.status = 'Invalid'
+        edit_ticket.user_completed = request.user.username
+        edit_ticket.save()
+
+        return HttpResponseRedirect(reverse("ticketview", args=[edit_ticket.id]))
+
+    if action_id == 'unassign':
+        edit_ticket.user_assigned = 'None'
+        edit_ticket.status = 'New'
+        edit_ticket.user_completed = 'None'
+        edit_ticket.save()
+
+        return HttpResponseRedirect(reverse("ticketview", args=[edit_ticket.id]))
+
+    if action_id == 'reopen':
+        edit_ticket.user_assigned = request.user.username
+        edit_ticket.status = 'In Progress'
+        edit_ticket.save()
+
+        return HttpResponseRedirect(reverse("ticketview", args=[edit_ticket.id]))
+
+    return HttpResponseRedirect(reverse("ticketview", args=[edit_ticket.id]))
 
 
 def logout_view(request):

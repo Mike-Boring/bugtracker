@@ -14,13 +14,95 @@
 {% if not ticket %}
 <h1>The ticket you are looking for does not exist.</h1>
 {% else %}
-<h2>{{ ticket.title }}</h2>
-<h4>Description: {{ ticket.description }}</h4>
-<h4>Created on: {{ ticket.post_date }}</h4>
-<h4>
-  Created by:
-  <a href="/user/{{ ticket.user_filed.id }}/">{{ ticket.user_filed }}</a>
-</h4>
-<h4>Assigned to: {{ ticket.user_assigned }}</h4>
-<h4>Completed by: {{ ticket.user_completed }}</h4>
+<div class="card" style="padding: 2px">
+  <h2 class="card-header" style="background-color: #bbb; padding: 10px">
+    <span
+      style="color: white; background-color: #337ab7; margin: 5px; padding: 8px"
+      >{{ ticket.id }}</span
+    >&nbsp;{{ ticket.title }}
+    <span style="float: right">
+      {% if ticket.status == "In Progress" %}
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/edit">Edit</a>
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/done"
+        >Complete</a
+      >
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/unassign"
+        >Return Ticket</a
+      >
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/invalid"
+        >Mark Invalid</a
+      >
+
+      {% elif ticket.status == "Done" %}
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/reopen"
+        >Reopen Ticket</a
+      >
+
+      {% elif ticket.status == "Invalid" %}
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/reopen"
+        >Reopen Ticket</a
+      >
+
+      {% elif ticket.status == "Unassign" %}
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/edit">Edit</a>
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/assign"
+        >Assign To You</a
+      >
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/invalid"
+        >Mark Invalid</a
+      >
+
+      {% else %}
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/edit">Edit</a>
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/assign"
+        >Assign To You</a
+      >
+      <a class="btn btn-success" href="/ticket/{{ ticket.id }}/action/invalid"
+        >Mark Invalid</a
+      >
+      {% endif %}
+    </span>
+  </h2>
+
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 30%">Info</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">Status: {{ ticket.status }}</td>
+          <td>{{ ticket.description }}</td>
+        </tr>
+        <tr>
+          <td scope="row">Submitted on: {{ ticket.post_date }}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td scope="row">
+            Reported by:
+            <a href="/user/{{ ticket.user_filed.id }}/"
+              >{{ ticket.user_filed }}</a
+            >
+          </td>
+          <td></td>
+        </tr>
+        {% if ticket.status == "In Progress" %}
+        <tr>
+          <td scope="row">Assigned to: {{ ticket.user_assigned }}</td>
+          <td></td>
+        </tr>
+        {% endif %} {% if ticket.status == "Done" %}
+        <tr>
+          <td scope="row">Completed by: {{ ticket.user_completed }}</td>
+          <td></td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endif %} {% endblock %}
