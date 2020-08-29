@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 from homepage.forms import LoginForm, AddTicketForm
 from myuser.models import MyUser
@@ -18,8 +19,9 @@ def index(request):
         status='Done').order_by('post_date').reverse()
     invalid_tickets = Ticket.objects.filter(
         status='Invalid').order_by('post_date').reverse()
+    current_time = timezone.now()
 
-    return render(request, "index.html", {"new_tickets": new_tickets, "progress_tickets": progress_tickets, "completed_tickets": completed_tickets, "invalid_tickets": invalid_tickets})
+    return render(request, "index.html", {"new_tickets": new_tickets, "progress_tickets": progress_tickets, "completed_tickets": completed_tickets, "invalid_tickets": invalid_tickets, "current_time": current_time})
 
 
 def ticket_detail_view(request, ticket_id):
